@@ -1,0 +1,66 @@
+🧠 Why This Is Important
+
+Without caching:
+Client
+  │
+  ▼
+Application
+  │
+  ▼
+Database
+  │
+  ▼
+Every request hits DB ❌
+
+With Redis:
+Client
+  │
+  ▼
+Application
+  │
+  ▼
+Redis Cache
+  │
+ ┌┴──────────────┐
+ │ Cache Hit     │
+ │      ↓        │
+ │ Return Data   │
+ └───────────────┘
+
+Cache Miss
+    │
+    ▼
+Database
+
+For multiple Redis nodes, we can distribute keys using consistent hashing:
+
+              Hash Ring
+
+          Redis Node 1
+               ●
+          /           \
+         /             \
+ Redis Node 3         Redis Node 2
+
+Benefits:
+✅ Faster responses
+✅ Reduced database load
+✅ Distributed cache
+✅ Horizontal scalability
+✅ Minimal key movement when nodes change
+
+🛠 Tech Stack
+Python
+Flask
+Redis
+Consistent Hashing
+Docker
+
+📂 Project Structure
+redis-consistent-cache/
+│
+├── app.py
+├── cache.py
+├── requirements.txt
+├── docker-compose.yml
+└── README.md
